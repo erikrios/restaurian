@@ -44,6 +44,12 @@ class RestaurantListPage extends StatelessWidget {
             case ConnectionState.done:
               {
                 if (snapshot.data == null) {
+                  SnackBar snackBar = const SnackBar(
+                    content: Text(
+                      'Failed to load the data.',
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   return _buildList(context, []);
                 } else {
                   Map<String, dynamic> json = jsonDecode(snapshot.data!);
