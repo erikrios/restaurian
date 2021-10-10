@@ -26,9 +26,9 @@ class RestaurantListPage extends StatelessWidget {
               bottom: 12.0,
             ),
             alignment: Alignment.centerLeft,
-            child: const Text(
+            child: Text(
               'Recommended restaurant for you!',
-              style: TextStyle(
+              style: myTextTheme.subtitle2!.copyWith(
                 color: Colors.white,
               ),
             ),
