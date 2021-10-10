@@ -82,9 +82,12 @@ class RestaurantListPage extends StatelessWidget {
 
   Widget _buildItemList(BuildContext context, Restaurant restaurant) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(
-          restaurant.pictureId,
+      leading: Hero(
+        tag: restaurant.id,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(
+            restaurant.pictureId,
+          ),
         ),
       ),
       title: Text(

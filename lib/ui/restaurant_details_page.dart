@@ -23,9 +23,12 @@ class RestaurantDetailsPage extends StatelessWidget {
                 color: Colors.white,
               ),
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  restaurant.pictureId,
-                  fit: BoxFit.fitWidth,
+                background: Hero(
+                  tag: restaurant.id,
+                  child: Image.network(
+                    restaurant.pictureId,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
                 title: Text(
                   restaurant.name,
