@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:restaurian/data/model/restaurant.dart';
+import 'package:restaurian/data/model/restaurant_response.dart';
 
 class RestaurantListPage extends StatelessWidget {
   const RestaurantListPage({Key? key}) : super(key: key);
@@ -29,10 +34,113 @@ class RestaurantListPage extends StatelessWidget {
           preferredSize: const Size.fromHeight(10.0),
         ),
       ),
-      body: const Center(
-        child: Text(
-          'Restaurant List Page',
+      body: FutureBuilder<String>(
+        future: DefaultAssetBundle.of(context)
+            .loadString('assets/restaurants.json'),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
+              {
+                if (snapshot.data == null) {
+                  return _buildList([]);
+                } else {
+                  Map<String, dynamic> json = jsonDecode(snapshot.data!);
+                  RestaurantResponse responses =
+                      RestaurantResponse.fromJson(json);
+                  List<Restaurant> restaurants = responses.restaurants;
+                  return _buildList(restaurants);
+                }
+              }
+            default:
+              {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildList(List<Restaurant> restaurants) {
+    return ListView.separated(
+      itemCount: restaurants.length,
+      separatorBuilder: (context, index) {
+        return const Divider(
+          height: 2.0,
+          color: Colors.grey,
+        );
+      },
+      itemBuilder: (context, index) {
+        Restaurant restaurant = restaurants[index];
+        return _buildItemList(restaurant);
+      },
+    );
+  }
+
+  Widget _buildItemList(Restaurant restaurant) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(
+          restaurant.pictureId,
         ),
+      ),
+      title: Text(
+        restaurant.name,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Row(
+        children: [
+          Flexible(
+            flex: 1,
+            child: SizedBox(
+              width: double.infinity,
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    const WidgetSpan(
+                      child: Icon(
+                        Icons.location_on,
+                        size: 15.0,
+                      ),
+                    ),
+                    TextSpan(
+                      text: restaurant.city,
+                      style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                WidgetSpan(
+                  child: Icon(
+                    restaurant.rating < 2.0
+                        ? Icons.star_outline
+                        : restaurant.rating < 4.0
+                            ? Icons.star_half
+                            : Icons.star,
+                    size: 15.0,
+                  ),
+                ),
+                TextSpan(
+                  text: restaurant.rating.toString(),
+                  style: const TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
