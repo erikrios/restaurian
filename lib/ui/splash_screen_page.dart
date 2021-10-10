@@ -16,7 +16,7 @@ class SplashScreenPage extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: Colors.cyan,
+      backgroundColor: Colors.indigo,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
