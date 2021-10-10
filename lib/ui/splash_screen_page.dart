@@ -11,7 +11,7 @@ class SplashScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
       Navigator.pushReplacementNamed(context, RestaurantListPage.routeName);
     });
 
