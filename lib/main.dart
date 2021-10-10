@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurian/common/styles.dart';
+import 'package:restaurian/data/model/restaurant.dart';
+import 'package:restaurian/ui/restaurant_details_page.dart';
 import 'package:restaurian/ui/restaurant_list_page.dart';
 import 'package:restaurian/ui/splash_screen_page.dart';
 
@@ -22,10 +24,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: SplashScreenPage.routeName,
         routes: {
-          SplashScreenPage.routeName: (BuildContext context) =>
-              const SplashScreenPage(),
-          RestaurantListPage.routeName: (BuildContext context) =>
-              const RestaurantListPage(),
+          SplashScreenPage.routeName: (context) => const SplashScreenPage(),
+          RestaurantListPage.routeName: (context) => const RestaurantListPage(),
+          RestaurantDetailsPage.routeName: (context) => RestaurantDetailsPage(
+              restaurant:
+                  ModalRoute.of(context)?.settings.arguments as Restaurant),
         },
       );
 }
