@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_response.dart';
+import 'package:restaurian/ui/restaurant_details_page.dart';
 
 class RestaurantListPage extends StatelessWidget {
   const RestaurantListPage({Key? key}) : super(key: key);
@@ -42,13 +43,13 @@ class RestaurantListPage extends StatelessWidget {
             case ConnectionState.done:
               {
                 if (snapshot.data == null) {
-                  return _buildList([]);
+                  return _buildList(context, []);
                 } else {
                   Map<String, dynamic> json = jsonDecode(snapshot.data!);
                   RestaurantResponse responses =
                       RestaurantResponse.fromJson(json);
                   List<Restaurant> restaurants = responses.restaurants;
-                  return _buildList(restaurants);
+                  return _buildList(context, restaurants);
                 }
               }
             default:
@@ -63,7 +64,7 @@ class RestaurantListPage extends StatelessWidget {
     );
   }
 
-  Widget _buildList(List<Restaurant> restaurants) {
+  Widget _buildList(BuildContext context, List<Restaurant> restaurants) {
     return ListView.separated(
       itemCount: restaurants.length,
       separatorBuilder: (context, index) {
@@ -74,12 +75,12 @@ class RestaurantListPage extends StatelessWidget {
       },
       itemBuilder: (context, index) {
         Restaurant restaurant = restaurants[index];
-        return _buildItemList(restaurant);
+        return _buildItemList(context, restaurant);
       },
     );
   }
 
-  Widget _buildItemList(Restaurant restaurant) {
+  Widget _buildItemList(BuildContext context, Restaurant restaurant) {
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: NetworkImage(
@@ -90,6 +91,13 @@ class RestaurantListPage extends StatelessWidget {
         restaurant.name,
         overflow: TextOverflow.ellipsis,
       ),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RestaurantDetailsPage.routeName,
+          arguments: restaurant,
+        );
+      },
       subtitle: Row(
         children: [
           Flexible(
@@ -139,7 +147,7 @@ class RestaurantListPage extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
