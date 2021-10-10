@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Restaurian',
         theme: ThemeData(
-          primarySwatch: Colors.purple,
+          primarySwatch: Colors.indigo,
           scaffoldBackgroundColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: myTextTheme,
