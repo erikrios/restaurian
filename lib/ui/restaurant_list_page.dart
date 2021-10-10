@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_response.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
@@ -118,9 +119,9 @@ class RestaurantListPage extends StatelessWidget {
                     ),
                     TextSpan(
                       text: restaurant.city,
-                      style: const TextStyle(
-                        overflow: TextOverflow.ellipsis,
+                      style: myTextTheme.subtitle2!.copyWith(
                         color: Colors.black,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -143,9 +144,9 @@ class RestaurantListPage extends StatelessWidget {
                 ),
                 TextSpan(
                   text: restaurant.rating.toString(),
-                  style: const TextStyle(
-                    overflow: TextOverflow.ellipsis,
+                  style: myTextTheme.subtitle2!.copyWith(
                     color: Colors.black,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
