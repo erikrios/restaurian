@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_list_response.dart';
-import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/result_state.dart';
-import 'package:restaurian/ui/restaurant_details_page.dart';
+import 'package:restaurian/widget/custom_list.dart';
+
+import 'restaurant_search_page.dart';
 
 class RestaurantListPage extends StatelessWidget {
   const RestaurantListPage({Key? key}) : super(key: key);
@@ -40,7 +41,12 @@ class RestaurantListPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                RestaurantSearchPage.routeName,
+              );
+            },
           ),
         ],
       ),
@@ -71,109 +77,13 @@ class RestaurantListPage extends StatelessWidget {
                     child: Text('Restaurant is empty.'),
                   );
                 } else {
-                  return _buildList(context, restaurants);
+                  return CustomList(
+                    restaurants: restaurants,
+                  );
                 }
               }
           }
         },
-      ),
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<Restaurant> restaurants) {
-    return ListView.separated(
-      itemCount: restaurants.length,
-      separatorBuilder: (context, index) {
-        return const Divider(
-          height: 2.0,
-          color: Colors.grey,
-        );
-      },
-      itemBuilder: (context, index) {
-        Restaurant restaurant = restaurants[index];
-        return _buildItemList(context, restaurant);
-      },
-    );
-  }
-
-  Widget _buildItemList(BuildContext context, Restaurant restaurant) {
-    return ListTile(
-      leading: Hero(
-        tag: restaurant.id,
-        child: CircleAvatar(
-          backgroundImage: NetworkImage(
-            restaurant.smallPictureUrl,
-          ),
-        ),
-      ),
-      title: Text(
-        restaurant.name,
-        overflow: TextOverflow.ellipsis,
-      ),
-      onTap: () {
-        RestaurantDetailProvider provider =
-            Provider.of<RestaurantDetailProvider>(
-          context,
-          listen: false,
-        );
-        provider.getRestaurant(restaurant.id);
-
-        Navigator.pushNamed(
-          context,
-          RestaurantDetailsPage.routeName,
-        );
-      },
-      subtitle: Row(
-        children: [
-          Flexible(
-            flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    const WidgetSpan(
-                      child: Icon(
-                        Icons.location_on,
-                        size: 15.0,
-                      ),
-                    ),
-                    TextSpan(
-                      text: restaurant.city,
-                      style: myTextTheme.subtitle2!.copyWith(
-                        color: Colors.black,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                WidgetSpan(
-                  child: Icon(
-                    restaurant.rating < 2.0
-                        ? Icons.star_outline
-                        : restaurant.rating < 4.0
-                            ? Icons.star_half
-                            : Icons.star,
-                    size: 15.0,
-                  ),
-                ),
-                TextSpan(
-                  text: restaurant.rating.toString(),
-                  style: myTextTheme.subtitle2!.copyWith(
-                    color: Colors.black,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
