@@ -43,7 +43,7 @@ class RestaurantListPage extends StatelessWidget {
           ResultState<RestaurantListResponse> state = provider.state;
           switch (state.status) {
             case Status.loading:
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             case Status.error:
               return Center(
                 child: Text(
@@ -99,7 +99,10 @@ class RestaurantListPage extends StatelessWidget {
       ),
       onTap: () {
         RestaurantDetailProvider provider =
-            Provider.of<RestaurantDetailProvider>(context);
+            Provider.of<RestaurantDetailProvider>(
+          context,
+          listen: false,
+        );
         provider.getRestaurant(restaurant.id);
 
         Navigator.pushNamed(

@@ -21,10 +21,21 @@ class RestaurantDetailsPage extends StatelessWidget {
         ResultState<RestaurantDetailResponse> state = provider.state;
         switch (state.status) {
           case Status.loading:
-            return const CircularProgressIndicator();
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Loading'),
+              ),
+              body: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           case Status.error:
-            return Center(
-              child: Text(state.message!),
+            return Scaffold(
+              body: Center(
+                child: Text(
+                  state.message!,
+                ),
+              ),
             );
           case Status.hasData:
             {
