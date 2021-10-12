@@ -13,7 +13,7 @@ class RestaurantsProvider extends ChangeNotifier {
   ResultState<RestaurantListResponse> _state =
       ResultState(status: Status.loading, message: null, data: null);
 
-  ResultState get state => _state;
+  ResultState<RestaurantListResponse> get state => _state;
 
   Future<ResultState> _getRestaurants() async {
     try {
