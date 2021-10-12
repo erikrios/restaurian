@@ -37,6 +37,12 @@ class RestaurantListPage extends StatelessWidget {
           ),
           preferredSize: const Size.fromHeight(10.0),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Consumer<RestaurantsProvider>(
         builder: (context, provider, _) {
