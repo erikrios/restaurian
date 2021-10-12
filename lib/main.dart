@@ -4,6 +4,7 @@ import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/api/api_service.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
+import 'package:restaurian/provider/restaurants_search_provider.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
 import 'package:restaurian/ui/restaurant_list_page.dart';
 import 'package:restaurian/ui/restaurant_search_page.dart';
@@ -29,6 +30,11 @@ class MyApp extends StatelessWidget {
               apiService: _apiService,
             ),
           ),
+          ChangeNotifierProvider<RestaurantSearchProvider>(
+            create: (_) => RestaurantSearchProvider(
+              apiService: _apiService,
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Restaurian',
@@ -48,7 +54,8 @@ class MyApp extends StatelessWidget {
                 const RestaurantListPage(),
             RestaurantDetailsPage.routeName: (context) =>
                 const RestaurantDetailsPage(),
-            RestaurantSearchPage.routeName: (context) => const RestaurantSearchPage(),
+            RestaurantSearchPage.routeName: (context) =>
+                const RestaurantSearchPage(),
           },
         ),
       );
