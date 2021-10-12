@@ -52,7 +52,10 @@ class RestaurantSearchPage extends StatelessWidget {
                   _debounce = Timer(const Duration(milliseconds: 500), () {
                     if (text.isNotEmpty) {
                       RestaurantSearchProvider provider =
-                          Provider.of<RestaurantSearchProvider>(context);
+                          Provider.of<RestaurantSearchProvider>(
+                        context,
+                        listen: false,
+                      );
                       provider.searchRestaurant(text);
                     }
                   });
