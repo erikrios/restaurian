@@ -6,7 +6,7 @@ class Restaurant {
   final String description;
   final String pictureId;
   final String city;
-  final double rating;
+  final num rating;
   final Menu menus;
 
   Restaurant({
