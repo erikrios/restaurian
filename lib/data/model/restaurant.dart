@@ -25,7 +25,7 @@ class Restaurant {
     String description = json['description'];
     String pictureId = json['pictureId'];
     String city = json['city'];
-    double rating = json['rating'];
+    num rating = json['rating'];
     Menu menus = Menu.fromJson(json['menus']);
 
     return Restaurant(
