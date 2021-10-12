@@ -32,8 +32,13 @@ class RestaurantDetailsPage extends StatelessWidget {
           case Status.error:
             return Scaffold(
               body: Center(
-                child: Text(
-                  state.message!,
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    16.0,
+                  ),
+                  child: Text(
+                    state.message!,
+                  ),
                 ),
               ),
             );

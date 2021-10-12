@@ -43,11 +43,18 @@ class RestaurantListPage extends StatelessWidget {
           ResultState<RestaurantListResponse> state = provider.state;
           switch (state.status) {
             case Status.loading:
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             case Status.error:
               return Center(
-                child: Text(
-                  state.message!,
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    16.0,
+                  ),
+                  child: Text(
+                    state.message!,
+                  ),
                 ),
               );
             case Status.hasData:
