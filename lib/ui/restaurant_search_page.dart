@@ -1,6 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurian/data/model/restaurant.dart';
+import 'package:restaurian/data/model/restaurant_search_response.dart';
+import 'package:restaurian/provider/restaurants_search_provider.dart';
+import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/widget/custom_list.dart';
 
 class RestaurantSearchPage extends StatelessWidget {
   static const routeName = '/restaurants/search';
@@ -45,7 +51,9 @@ class RestaurantSearchPage extends StatelessWidget {
                   if (_debounce?.isActive ?? false) _debounce!.cancel();
                   _debounce = Timer(const Duration(milliseconds: 500), () {
                     if (text.isNotEmpty) {
-                      // TODO call the api
+                      RestaurantSearchProvider provider =
+                          Provider.of<RestaurantSearchProvider>(context);
+                      provider.searchRestaurant(text);
                     }
                   });
                 },
@@ -54,8 +62,42 @@ class RestaurantSearchPage extends StatelessWidget {
           ),
           Flexible(
             flex: 1,
-            child: Container(
-              color: Colors.blue,
+            child: Consumer<RestaurantSearchProvider>(
+              builder: (context, provider, _) {
+                ResultState<RestaurantSearchResponse> state = provider.state;
+                switch (state.status) {
+                  case Status.loading:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  case Status.error:
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(
+                          16.0,
+                        ),
+                        child: Text(
+                          state.message!,
+                        ),
+                      ),
+                    );
+                  case Status.hasData:
+                    {
+                      {
+                        List<Restaurant> restaurants = state.data!.restaurants;
+                        if (restaurants.isEmpty) {
+                          return const Center(
+                            child: Text('The search result is empty.'),
+                          );
+                        } else {
+                          return CustomList(
+                            restaurants: restaurants,
+                          );
+                        }
+                      }
+                    }
+                }
+              },
             ),
           ),
         ],
