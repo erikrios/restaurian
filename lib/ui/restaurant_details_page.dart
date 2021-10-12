@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
+import 'package:restaurian/data/model/customer_review.dart';
 import 'package:restaurian/data/model/drink.dart';
 import 'package:restaurian/data/model/food.dart';
 import 'package:restaurian/data/model/restaurant.dart';
@@ -117,6 +118,14 @@ class RestaurantDetailsPage extends StatelessWidget {
                             ),
                           ),
                         ],
+                      ),
+                      const Divider(
+                        height: 22.0,
+                        color: Colors.transparent,
+                      ),
+                      Center(
+                        child: _buildCustomerReviews(
+                            context, restaurant.customerReviews),
                       ),
                     ],
                   ),
@@ -248,6 +257,49 @@ class RestaurantDetailsPage extends StatelessWidget {
                         title: Text(
                           drinks[index].name,
                         ),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomerReviews(
+      BuildContext context, List<CustomerReview> reviews) {
+    return Center(
+      child: Column(
+        children: [
+          Text(
+            'Customer reviews.',
+            textAlign: TextAlign.center,
+            style: myTextTheme.subtitle1!.copyWith(
+              color: Colors.black54,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.person,
+              size: 50.0,
+            ),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return ListView.builder(
+                    itemCount: reviews.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: const Icon(Icons.person),
+                        title: Text(
+                          reviews[index].review,
+                        ),
+                        subtitle: Text(
+                            '${reviews[index].name} on ${reviews[index].date}'),
                       );
                     },
                   );
