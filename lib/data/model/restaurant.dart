@@ -66,9 +66,9 @@ class Restaurant {
     );
   }
 
-  get smallPictureUrl => '$baseUrl/images/small/$pictureId';
+  String get smallPictureUrl => '$baseUrl/images/small/$pictureId';
 
-  get mediumPictureUrl => '$baseUrl/images/medium/$pictureId';
+  String get mediumPictureUrl => '$baseUrl/images/medium/$pictureId';
 
-  get largePictureUrl => '$baseUrl/images/large/$pictureId';
+  String get largePictureUrl => '$baseUrl/images/large/$pictureId';
 }
