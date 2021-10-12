@@ -17,7 +17,7 @@ class RestaurantListResponse {
     final bool error = json['error'];
     final String message = json['message'];
     final int count = json['count'];
-    List<Restaurant> restaurants = (json['restaurants'] as List)
+    final List<Restaurant> restaurants = (json['restaurants'] as List)
         .map((restaurantJson) => Restaurant.fromJson(restaurantJson))
         .toList();
 

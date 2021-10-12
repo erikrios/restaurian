@@ -30,22 +30,22 @@ class Restaurant {
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
-    String id = json['id'];
-    String name = json['name'];
-    String description = json['description'];
-    String pictureId = json['pictureId'];
-    String city = json['city'];
-    String address = json['address'] ?? "";
-    num rating = json['rating'];
-    Menu menus = json['menus'] != null
+    final String id = json['id'];
+    final String name = json['name'];
+    final String description = json['description'];
+    final String pictureId = json['pictureId'];
+    final String city = json['city'];
+    final String address = json['address'] ?? "";
+    final num rating = json['rating'];
+    final Menu menus = json['menus'] != null
         ? Menu.fromJson(json['menus'])
         : Menu(foods: [], drinks: []);
-    List<Category> categories = json['categories'] != null
+    final List<Category> categories = json['categories'] != null
         ? (json['categories'] as List)
             .map((categoryJson) => Category.fromJson(categoryJson))
             .toList()
         : [];
-    List<CustomerReview> customerReviews = json['customerReviews'] != null
+    final List<CustomerReview> customerReviews = json['customerReviews'] != null
         ? (json['customerReviews'] as List)
             .map((customerReviewJson) =>
                 CustomerReview.fromJson(customerReviewJson))
