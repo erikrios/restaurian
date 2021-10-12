@@ -1,7 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:restaurian/data/api/api_service.dart';
 import 'package:restaurian/data/model/restaurant_detail_response.dart';
 import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/utils/constant.dart';
 
 class RestaurantDetailProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -25,7 +29,17 @@ class RestaurantDetailProvider extends ChangeNotifier {
           data: restaurantDetailResponse);
       notifyListeners();
       return _state;
-    } catch (e) {
+    } on TimeoutException {
+      _state = ResultState(
+          status: Status.error, message: timeoutExceptionMessage, data: null);
+      notifyListeners();
+      return _state;
+    } on SocketException {
+      _state = ResultState(
+          status: Status.error, message: socketExceptionMessage, data: null);
+      notifyListeners();
+      return _state;
+    } on Error catch (e) {
       _state =
           ResultState(status: Status.error, message: e.toString(), data: null);
       notifyListeners();

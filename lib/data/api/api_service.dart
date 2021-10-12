@@ -12,10 +12,6 @@ class ApiService {
   static const String _listEndpoint = '/list';
   static const String _detailEndpoint = '/detail';
   static const String _searchEndpoint = '/search';
-  static const String _timeoutExceptionMessage =
-      'Connection timeout. Please try again later.';
-  static const String _socketExceptionMessage =
-      'No internet connection. Please turn on your internet.';
   static const int _timeout = 5;
 
   Future<RestaurantListResponse> getRestaurants() async {
@@ -30,10 +26,6 @@ class ApiService {
       } else {
         throw Exception('Failed to load the restaurant list.');
       }
-    } on TimeoutException {
-      throw TimeoutException(_timeoutExceptionMessage);
-    } on SocketException {
-      throw const SocketException(_socketExceptionMessage);
     } on Error {
       rethrow;
     }
@@ -53,10 +45,6 @@ class ApiService {
       } else {
         throw Exception('Failed to load the restaurant details.');
       }
-    } on TimeoutException {
-      throw TimeoutException(_timeoutExceptionMessage);
-    } on SocketException {
-      throw const SocketException(_socketExceptionMessage);
     } on Error {
       rethrow;
     }
@@ -80,10 +68,6 @@ class ApiService {
       } else {
         throw Exception('Failed to load the restaurants search result.');
       }
-    } on TimeoutException {
-      throw TimeoutException(_timeoutExceptionMessage);
-    } on SocketException {
-      throw const SocketException(_socketExceptionMessage);
     } on Error {
       rethrow;
     }
