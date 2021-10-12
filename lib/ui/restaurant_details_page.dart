@@ -86,6 +86,7 @@ class RestaurantDetailsPage extends StatelessWidget {
                         restaurant.rating.toDouble(),
                       ),
                       _buildLocation(
+                        restaurant.address,
                         restaurant.city,
                       ),
                       const Divider(
@@ -158,9 +159,9 @@ class RestaurantDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLocation(String location) {
+  Widget _buildLocation(String location, String city) {
     return Text(
-      'This restaurant is located in $location.',
+      'This restaurant is located in $location, $city.',
       maxLines: 2,
       style: myTextTheme.subtitle1!.copyWith(
         overflow: TextOverflow.ellipsis,
