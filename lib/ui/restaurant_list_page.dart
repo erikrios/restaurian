@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
-import 'package:restaurian/data/model/restaurant_response.dart';
+import 'package:restaurian/data/model/restaurant_list_response.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
 
 class RestaurantListPage extends StatelessWidget {
@@ -53,8 +53,8 @@ class RestaurantListPage extends StatelessWidget {
                   return _buildList(context, []);
                 } else {
                   Map<String, dynamic> json = jsonDecode(snapshot.data!);
-                  RestaurantResponse responses =
-                      RestaurantResponse.fromJson(json);
+                  RestaurantListResponse responses =
+                      RestaurantListResponse.fromJson(json);
                   List<Restaurant> restaurants = responses.restaurants;
                   return _buildList(context, restaurants);
                 }
