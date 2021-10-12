@@ -1,10 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_list_response.dart';
+import 'package:restaurian/provider/restaurants_provider.dart';
+import 'package:restaurian/provider/result_state.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
 
 class RestaurantListPage extends StatelessWidget {
@@ -36,34 +37,28 @@ class RestaurantListPage extends StatelessWidget {
           preferredSize: const Size.fromHeight(10.0),
         ),
       ),
-      body: FutureBuilder<String>(
-        future: DefaultAssetBundle.of(context)
-            .loadString('assets/restaurants.json'),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
+      body: Consumer<RestaurantsProvider>(
+        builder: (context, provider, _) {
+          ResultState<RestaurantListResponse> state = provider.state;
+          switch (state.status) {
+            case Status.loading:
+              return const CircularProgressIndicator();
+            case Status.error:
+              return Center(
+                child: Text(
+                  state.message!,
+                ),
+              );
+            case Status.hasData:
               {
-                if (snapshot.data == null) {
-                  SnackBar snackBar = const SnackBar(
-                    content: Text(
-                      'Failed to load the data.',
-                    ),
+                List<Restaurant> restaurants = state.data!.restaurants;
+                if (restaurants.isEmpty) {
+                  return const Center(
+                    child: Text('Restaurant is empty.'),
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  return _buildList(context, []);
                 } else {
-                  Map<String, dynamic> json = jsonDecode(snapshot.data!);
-                  RestaurantListResponse responses =
-                      RestaurantListResponse.fromJson(json);
-                  List<Restaurant> restaurants = responses.restaurants;
                   return _buildList(context, restaurants);
                 }
-              }
-            default:
-              {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
               }
           }
         },
