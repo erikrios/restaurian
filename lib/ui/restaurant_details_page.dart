@@ -53,7 +53,7 @@ class RestaurantDetailsPage extends StatelessWidget {
           ),
           children: [
             _buildRating(
-              restaurant.rating,
+              restaurant.rating.toDouble(),
             ),
             _buildLocation(
               restaurant.city,
