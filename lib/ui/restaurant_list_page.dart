@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_list_response.dart';
+import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/result_state.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
@@ -88,7 +89,7 @@ class RestaurantListPage extends StatelessWidget {
         tag: restaurant.id,
         child: CircleAvatar(
           backgroundImage: NetworkImage(
-            restaurant.pictureId,
+            restaurant.smallPictureUrl,
           ),
         ),
       ),
@@ -97,10 +98,13 @@ class RestaurantListPage extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       onTap: () {
+        RestaurantDetailProvider provider =
+            Provider.of<RestaurantDetailProvider>(context);
+        provider.getRestaurant(restaurant.id);
+
         Navigator.pushNamed(
           context,
           RestaurantDetailsPage.routeName,
-          arguments: restaurant,
         );
       },
       subtitle: Row(
