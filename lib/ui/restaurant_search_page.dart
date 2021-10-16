@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_search_response.dart';
 import 'package:restaurian/provider/restaurants_search_provider.dart';
-import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/utils/result_state.dart';
 import 'package:restaurian/widget/custom_list.dart';
 
 class RestaurantSearchPage extends StatelessWidget {

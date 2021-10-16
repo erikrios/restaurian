@@ -5,7 +5,7 @@ import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_list_response.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
-import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/utils/result_state.dart';
 import 'package:restaurian/ui/restaurant_favorites_page.dart';
 import 'package:restaurian/ui/settings_page.dart';
 import 'package:restaurian/widget/custom_list.dart';

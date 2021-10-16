@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/provider/database_provider.dart';
-import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/utils/result_state.dart';
 import 'package:restaurian/widget/custom_list.dart';
 
 class RestaurantFavoritePage extends StatelessWidget {

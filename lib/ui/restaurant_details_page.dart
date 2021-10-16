@@ -9,7 +9,7 @@ import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_detail_response.dart';
 import 'package:restaurian/provider/database_provider.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
-import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/utils/result_state.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {
   static const routeName = "/restaurants/details";
