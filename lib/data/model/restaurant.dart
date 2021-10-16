@@ -66,6 +66,19 @@ class Restaurant {
     );
   }
 
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "pictureId": pictureId,
+        "city": city,
+        "address": address,
+        "rating": rating,
+        "menus": '{foods: [], drinks: []}',
+        "categories": '[]',
+        "customerReviews": '[]',
+      };
+
   String get smallPictureUrl => '$baseUrl/images/small/$pictureId';
 
   String get mediumPictureUrl => '$baseUrl/images/medium/$pictureId';
