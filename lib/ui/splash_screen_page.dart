@@ -15,6 +15,7 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   late Timer timer;
+  bool _isStopped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         seconds: 3,
       ),
       (timer) {
-        Navigator.pushReplacementNamed(context, RestaurantListPage.routeName);
+        if (!_isStopped) {
+          _isStopped = true;
+          Navigator.pushReplacementNamed(context, RestaurantListPage.routeName);
+        } else {
+          timer.cancel();
+        }
       },
     );
 

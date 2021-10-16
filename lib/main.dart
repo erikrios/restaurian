@@ -9,6 +9,7 @@ import 'package:restaurian/ui/restaurant_details_page.dart';
 import 'package:restaurian/ui/restaurant_favorites_page.dart';
 import 'package:restaurian/ui/restaurant_list_page.dart';
 import 'package:restaurian/ui/restaurant_search_page.dart';
+import 'package:restaurian/ui/settings_page.dart';
 import 'package:restaurian/ui/splash_screen_page.dart';
 
 void main() => runApp(MyApp());
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
                 const RestaurantSearchPage(),
             RestaurantFavoritePage.routeName: (context) =>
                 const RestaurantFavoritePage(),
+            SettingsPage.routeName: (context) => const SettingsPage(),
           },
         ),
       );
