@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/api/api_service.dart';
+import 'package:restaurian/data/db/database_helper.dart';
+import 'package:restaurian/provider/database_provider.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/restaurants_search_provider.dart';
@@ -35,6 +37,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<RestaurantSearchProvider>(
             create: (_) => RestaurantSearchProvider(
               apiService: _apiService,
+            ),
+          ),
+          ChangeNotifierProvider<DatabaseProvider>(
+            create: (_) => DatabaseProvider(
+              databaseHelper: DatabaseHelper(),
             ),
           ),
         ],
