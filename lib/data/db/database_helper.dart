@@ -63,4 +63,13 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  Future<bool> isFavorite(String id) async {
+    Database? db = await database;
+    List<Map<String, dynamic>> results = await db!.rawQuery(
+      'SELECT COUNT(id) FROM $_favoritesTable WHERE id = ?',
+      [id],
+    );
+    return results.isNotEmpty;
+  }
 }
