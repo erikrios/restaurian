@@ -7,6 +7,7 @@ import 'package:restaurian/data/model/drink.dart';
 import 'package:restaurian/data/model/food.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_detail_response.dart';
+import 'package:restaurian/provider/database_provider.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/result_state.dart';
 
@@ -46,6 +47,9 @@ class RestaurantDetailsPage extends StatelessWidget {
           case Status.hasData:
             {
               Restaurant restaurant = state.data!.restaurant;
+              DatabaseProvider databaseProvider =
+                  Provider.of<DatabaseProvider>(context, listen: false);
+              databaseProvider.isFavoriteExists(restaurant.id);
               return Scaffold(
                 body: NestedScrollView(
                   headerSliverBuilder: (context, isScroller) {
@@ -76,9 +80,24 @@ class RestaurantDetailsPage extends StatelessWidget {
                           ),
                         ),
                         actions: [
-                          IconButton(
-                            icon: const Icon(Icons.favorite_border),
-                            onPressed: () {},
+                          Consumer<DatabaseProvider>(
+                            builder: (context, provider, _) => IconButton(
+                              icon: provider.isFavorite
+                                  ? const Icon(Icons.favorite)
+                                  : const Icon(Icons.favorite_border),
+                              onPressed: () {
+                                if (provider.isFavorite) {
+                                  databaseProvider
+                                      .removeFavorite(restaurant.id);
+                                  databaseProvider
+                                      .isFavoriteExists(restaurant.id);
+                                } else {
+                                  databaseProvider.addFavorite(restaurant);
+                                  databaseProvider
+                                      .isFavoriteExists(restaurant.id);
+                                }
+                              },
+                            ),
                           ),
                         ],
                       ),
