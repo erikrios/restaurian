@@ -4,6 +4,8 @@ import 'package:restaurian/widget/custom_list.dart';
 class RestaurantFavorite extends StatelessWidget {
   const RestaurantFavorite({Key? key}) : super(key: key);
 
+  static const routeName = '/restaurants/favorites';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
