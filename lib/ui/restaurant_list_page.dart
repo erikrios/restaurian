@@ -48,6 +48,14 @@ class RestaurantListPage extends StatelessWidget {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {},
+          ),
         ],
       ),
       body: Consumer<RestaurantsProvider>(
