@@ -25,12 +25,6 @@ class RestaurantDetailsPage extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Loading'),
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.favorite_border),
-                    onPressed: () {},
-                  ),
-                ],
               ),
               body: const Center(
                 child: CircularProgressIndicator(),
@@ -81,6 +75,12 @@ class RestaurantDetailsPage extends StatelessWidget {
                             bottom: 16.0,
                           ),
                         ),
+                        actions: [
+                          IconButton(
+                            icon: const Icon(Icons.favorite_border),
+                            onPressed: () {},
+                          ),
+                        ],
                       ),
                     ];
                   },
