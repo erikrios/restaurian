@@ -6,6 +6,7 @@ import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/data/model/restaurant_list_response.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/result_state.dart';
+import 'package:restaurian/ui/restaurant_favorites_page.dart';
 import 'package:restaurian/widget/custom_list.dart';
 
 import 'restaurant_search_page.dart';
@@ -50,7 +51,12 @@ class RestaurantListPage extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.favorite),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                RestaurantFavoritePage.routeName,
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.settings),
