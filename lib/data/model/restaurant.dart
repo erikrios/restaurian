@@ -1,3 +1,4 @@
+
 import 'package:restaurian/data/model/category.dart';
 import 'package:restaurian/data/model/customer_review.dart';
 import 'package:restaurian/utils/constant.dart';
@@ -74,9 +75,6 @@ class Restaurant {
         "city": city,
         "address": address,
         "rating": rating,
-        "menus": '{foods: [], drinks: []}',
-        "categories": '[]',
-        "customerReviews": '[]',
       };
 
   String get smallPictureUrl => '$baseUrl/images/small/$pictureId';

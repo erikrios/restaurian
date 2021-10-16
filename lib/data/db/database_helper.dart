@@ -25,10 +25,7 @@ class DatabaseHelper {
            pictureId TEXT NOT NULL,
            city TEXT NOT NULL,
            address TEXT NOT NULL,
-           rating REAL NOT NULL,
-           menus TEXT NOT NULL,
-           categories TEXT NOT NULL,
-           customerReviews TEXT NOT NULL
+           rating REAL NOT NULL
           )
            ''');
       },
@@ -67,9 +64,9 @@ class DatabaseHelper {
   Future<bool> isFavorite(String id) async {
     Database? db = await database;
     List<Map<String, dynamic>> results = await db!.rawQuery(
-      'SELECT COUNT(id) FROM $_favoritesTable WHERE id = ?',
+      'SELECT COUNT(id) AS count FROM $_favoritesTable WHERE id = ?',
       [id],
     );
-    return results.isNotEmpty;
+    return results[0]['count'] as int == 1;
   }
 }
