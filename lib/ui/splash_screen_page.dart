@@ -4,14 +4,21 @@ import 'package:flutter/material.dart';
 
 import 'restaurant_list_page.dart';
 
-class SplashScreenPage extends StatelessWidget {
+class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
 
   static const routeName = '/splash';
 
   @override
+  State<SplashScreenPage> createState() => _SplashScreenPageState();
+}
+
+class _SplashScreenPageState extends State<SplashScreenPage> {
+  late Timer timer;
+
+  @override
   Widget build(BuildContext context) {
-    Timer.periodic(
+    timer = Timer.periodic(
       const Duration(
         seconds: 3,
       ),
@@ -51,5 +58,11 @@ class SplashScreenPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 }
