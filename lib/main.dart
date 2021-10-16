@@ -14,6 +14,7 @@ import 'package:restaurian/provider/preferences_provider.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/restaurants_search_provider.dart';
+import 'package:restaurian/provider/scheduling_provider.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
 import 'package:restaurian/ui/restaurant_favorites_page.dart';
 import 'package:restaurian/ui/restaurant_list_page.dart';
@@ -77,6 +78,9 @@ class MyApp extends StatelessWidget {
                 sharedPreferences: SharedPreferences.getInstance(),
               ),
             ),
+          ),
+          ChangeNotifierProvider<SchedulingProvider>(
+            create: (_) => SchedulingProvider(),
           ),
         ],
         child: MaterialApp(
