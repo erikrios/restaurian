@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restaurian/widget/custom_list.dart';
 
-class RestaurantFavorite extends StatelessWidget {
-  const RestaurantFavorite({Key? key}) : super(key: key);
+class RestaurantFavoritePage extends StatelessWidget {
+  const RestaurantFavoritePage({Key? key}) : super(key: key);
 
   static const routeName = '/restaurants/favorites';
 
