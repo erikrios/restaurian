@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurian/common/navigation.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
@@ -43,10 +44,9 @@ class CustomList extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       onTap: () {
-        Navigator.pushNamed(
-          context,
+        Navigation.intentWithData(
           RestaurantDetailsPage.routeName,
-          arguments: restaurant.id,
+          restaurant.id,
         );
       },
       subtitle: Row(
