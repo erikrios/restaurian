@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/api/api_service.dart';
 import 'package:restaurian/data/db/database_helper.dart';
+import 'package:restaurian/data/preferences/preferences_helper.dart';
 import 'package:restaurian/provider/database_provider.dart';
+import 'package:restaurian/provider/preferences_provider.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/restaurants_search_provider.dart';
@@ -13,6 +15,7 @@ import 'package:restaurian/ui/restaurant_list_page.dart';
 import 'package:restaurian/ui/restaurant_search_page.dart';
 import 'package:restaurian/ui/settings_page.dart';
 import 'package:restaurian/ui/splash_screen_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -42,6 +45,13 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<DatabaseProvider>(
             create: (_) => DatabaseProvider(
               databaseHelper: DatabaseHelper(),
+            ),
+          ),
+          ChangeNotifierProvider<PreferencesProvider>(
+            create: (_) => PreferencesProvider(
+              preferencesHelper: PreferencesHelper(
+                sharedPreferences: SharedPreferences.getInstance(),
+              ),
             ),
           ),
         ],
