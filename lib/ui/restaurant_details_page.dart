@@ -14,10 +14,21 @@ import 'package:restaurian/utils/result_state.dart';
 class RestaurantDetailsPage extends StatelessWidget {
   static const routeName = "/restaurants/details";
 
-  const RestaurantDetailsPage({Key? key}) : super(key: key);
+  final String restaurantId;
+
+  const RestaurantDetailsPage({
+    Key? key,
+    required this.restaurantId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    RestaurantDetailProvider provider = Provider.of<RestaurantDetailProvider>(
+      context,
+      listen: false,
+    );
+    provider.getRestaurant(restaurantId);
+
     return Consumer<RestaurantDetailProvider>(
       builder: (context, provider, _) {
         ResultState<RestaurantDetailResponse> state = provider.state;

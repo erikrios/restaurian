@@ -45,16 +45,10 @@ class CustomList extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       onTap: () {
-        RestaurantDetailProvider provider =
-            Provider.of<RestaurantDetailProvider>(
-          context,
-          listen: false,
-        );
-        provider.getRestaurant(restaurant.id);
-
         Navigator.pushNamed(
           context,
           RestaurantDetailsPage.routeName,
+          arguments: restaurant.id,
         );
       },
       subtitle: Row(
