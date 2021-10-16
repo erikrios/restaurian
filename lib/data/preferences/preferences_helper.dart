@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferenceHelper {
+class PreferencesHelper {
   final Future<SharedPreferences> sharedPreferences;
 
-  PreferenceHelper({required this.sharedPreferences});
+  PreferencesHelper({required this.sharedPreferences});
 
   static const dailyRestaurant = 'DAILY_RESTAURANT';
 
