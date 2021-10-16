@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurian/provider/preferences_provider.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -24,9 +26,14 @@ class SettingsPage extends StatelessWidget {
                 subtitle: const Text(
                   'Recommendation restaurant for you',
                 ),
-                trailing: Switch.adaptive(
-                  value: false,
-                  onChanged: (value) {},
+                trailing: Consumer<PreferencesProvider>(
+                  builder: (context, provider, _) {
+                    return Switch.adaptive(
+                      value: provider.isDailyRestaurantActive,
+                      onChanged: (value) =>
+                          provider.enableDailyRestaurant(value),
+                    );
+                  },
                 ),
               ),
             ),
