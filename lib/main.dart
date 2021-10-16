@@ -6,6 +6,7 @@ import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/provider/restaurants_provider.dart';
 import 'package:restaurian/provider/restaurants_search_provider.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
+import 'package:restaurian/ui/restaurant_favorites_page.dart';
 import 'package:restaurian/ui/restaurant_list_page.dart';
 import 'package:restaurian/ui/restaurant_search_page.dart';
 import 'package:restaurian/ui/splash_screen_page.dart';
@@ -56,6 +57,8 @@ class MyApp extends StatelessWidget {
                 const RestaurantDetailsPage(),
             RestaurantSearchPage.routeName: (context) =>
                 const RestaurantSearchPage(),
+            RestaurantFavoritePage.routeName: (context) =>
+                const RestaurantFavoritePage(),
           },
         ),
       );
