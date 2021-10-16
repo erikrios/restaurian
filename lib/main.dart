@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurian/common/navigation.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/api/api_service.dart';
 import 'package:restaurian/data/db/database_helper.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
               titleTextStyle: myTextTheme.headline6,
             ),
           ),
+          navigatorKey: navigatorKey,
           initialRoute: SplashScreenPage.routeName,
           routes: {
             SplashScreenPage.routeName: (context) => const SplashScreenPage(),
