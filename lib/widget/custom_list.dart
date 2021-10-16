@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:restaurian/common/styles.dart';
 import 'package:restaurian/data/model/restaurant.dart';
-import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/ui/restaurant_details_page.dart';
 
 class CustomList extends StatelessWidget {
