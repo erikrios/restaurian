@@ -11,7 +11,7 @@ import 'package:restaurian/provider/database_provider.dart';
 import 'package:restaurian/provider/restaurant_detail_provider.dart';
 import 'package:restaurian/utils/result_state.dart';
 
-class RestaurantDetailsPage extends StatelessWidget {
+class RestaurantDetailsPage extends StatefulWidget {
   static const routeName = "/restaurants/details";
 
   final String restaurantId;
@@ -22,13 +22,24 @@ class RestaurantDetailsPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    RestaurantDetailProvider provider = Provider.of<RestaurantDetailProvider>(
-      context,
-      listen: false,
-    );
-    provider.getRestaurant(restaurantId);
+  State<RestaurantDetailsPage> createState() => _RestaurantDetailsPageState();
+}
 
+class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
+  @override
+  void initState() {
+    Future.microtask(() {
+      RestaurantDetailProvider provider = Provider.of<RestaurantDetailProvider>(
+        context,
+        listen: false,
+      );
+      provider.getRestaurant(widget.restaurantId);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Consumer<RestaurantDetailProvider>(
       builder: (context, provider, _) {
         ResultState<RestaurantDetailResponse> state = provider.state;
